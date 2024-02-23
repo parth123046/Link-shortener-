@@ -56,13 +56,25 @@
                 return;
             }
 
-            // Make a request to server to shorten URL (not implemented here)
-            // For this example, let's assume shortening happens on the server-side
-            // and the response contains the shortened URL
+            // Generate a random short code (for simplicity)
+            var shortCode = generateShortCode();
 
-            var shortUrl = 'https://short.url/abcd123'; // Example shortened URL
+            // Save the mapping of short code to long URL in local storage
+            localStorage.setItem(shortCode, longUrl);
+
+            // Display the shortened URL
+            var shortUrl = window.location.origin + '/s/' + shortCode;
             var shortUrlDisplay = document.getElementById('shortUrl');
             shortUrlDisplay.innerHTML = '<strong>Shortened URL:</strong> <a href="' + shortUrl + '" target="_blank">' + shortUrl + '</a>';
+        }
+
+        function generateShortCode() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var shortCode = '';
+            for (var i = 0; i < 6; i++) {
+                shortCode += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return shortCode;
         }
     </script>
 </body>
